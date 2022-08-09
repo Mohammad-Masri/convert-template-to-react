@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import {
@@ -27,6 +27,18 @@ import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
   const history = useHistory();
+
+  const isDesktop = () => window.innerWidth > 700;
+
+  const [open, setOpen] = useState(isDesktop());
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      console.log("window.innerWidth : ", window.innerWidth);
+      setOpen(isDesktop());
+    });
+    return () => window.removeEventListener("resize", isDesktop);
+  }, []);
 
   const [menuItems, setMenuItems] = useState([
     {
@@ -116,6 +128,7 @@ const Sidebar = () => {
       alignItems="stretch"
       className={styles.sidebar}
       spacing={2}
+      style={{ display: open ? "block" : "none" }}
     >
       {/* user details */}
       <Grid item>
