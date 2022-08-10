@@ -21,6 +21,8 @@ import DiamondIcon from "@mui/icons-material/Diamond";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import RestoreIcon from "@mui/icons-material/Restore";
+import CategoryIcon from "@mui/icons-material/Category";
+
 import { user } from "../../data/user";
 
 import styles from "./Sidebar.module.css";
@@ -46,14 +48,21 @@ const Sidebar = () => {
       is_active: true,
       label: "Overview",
       icon: <GroupsIcon fontSize="small" className={styles.btn_black} />,
-      link: "#overview",
+      link: "/#overview",
+    },
+    {
+      id: "product",
+      is_active: false,
+      label: "Product",
+      icon: <CategoryIcon fontSize="small" className={styles.btn_black} />,
+      link: "/product",
     },
     {
       id: "views",
       is_active: false,
       label: "Views",
       icon: <VisibilityIcon fontSize="small" className={styles.btn_black} />,
-      link: "#views",
+      link: "/#views",
     },
     {
       id: "traffic",
@@ -216,6 +225,7 @@ const Sidebar = () => {
                 key={item.id}
                 onClick={() => {
                   history.push(item.link);
+                  window.location.reload(true);
                   updateActiveMenuItem(item.id);
                 }}
               >

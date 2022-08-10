@@ -27,6 +27,17 @@ export class ProductDashboardController {
     return products;
   }
 
+  @Get('/:product_id')
+  @ApiOkResponse({
+    type: IProduct,
+  })
+  async getProduct(@Param('product_id') product_id: string) {
+    const product = await this.productService.checkIfFindByIdAndGetIt(
+      product_id,
+    );
+    return product;
+  }
+
   @Post('/')
   @ApiOkResponse({
     type: IProduct,
